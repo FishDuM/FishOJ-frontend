@@ -4,7 +4,7 @@ import GlobalHeader from "@/components/GlobalHeader.vue";
 
 <template>
   <div id="basicLayout">
-    <a-layout style="height: 400px">
+    <a-layout style="height: 100vh">
       <a-layout-header class="header">
         <GlobalHeader />
       </a-layout-header>
@@ -27,11 +27,12 @@ import GlobalHeader from "@/components/GlobalHeader.vue";
 
 #basicLayout .content {
   margin-bottom: 16px;
+  padding: 16px;
   background: linear-gradient(to right, #bbb, #fff);
 }
 
 #basicLayout .footer {
-  position: absolute;
+  position: sticky;
   padding: 16px;
   text-align: center;
   bottom: 0;

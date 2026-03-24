@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { routes } from "@/router/routes";
-import { ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import checkAccess from "@/access/checkAccess";
+import accessEnum from "@/access/accessEnum";
 
 const router = useRouter();
 const selectedKeys = ref(["/"]);
@@ -20,12 +22,33 @@ function doMenuClick(key: string) {
 const store = useStore();
 
 setTimeout(() => {
-  store.dispatch("user/getLoginUser", { userName: "fish" });
+  store.dispatch("user/getLoginUser", {
+    userName: "fish",
+    role: accessEnum.ADMIN,
+  });
 }, 3000);
+
+const visibleRoutes = computed(() => {
+  return routes.filter((item) => {
+    console.log(store.state.user.loginUser);
+    if (item.meta?.hideInMenu) {
+      return false;
+    } else if (
+      !checkAccess(store.state.user.loginUser.role, item.meta?.success)
+    ) {
+      return false;
+    }
+    return true;
+  });
+});
+
+onMounted(() => {
+  console.log(store.state.user.loginUser);
+});
 </script>
 
 <template>
-  <a-row id="globalHeader" style="margin-bottom: 16px" align="center">
+  <a-row id="globalHeader" align="center" :wrap="false">
     <a-col flex="auto">
       <a-menu
         mode="horizontal"
@@ -42,7 +65,7 @@ setTimeout(() => {
             <div class="title">Fish OJ</div>
           </div>
         </a-menu-item>
-        <a-menu-item v-for="item in routes" :key="item.path">
+        <a-menu-item v-for="item in visibleRoutes" :key="item.path">
           {{ item.name }}
         </a-menu-item>
       </a-menu>
