@@ -2,6 +2,7 @@
 import BasicLayout from "@/layouts/BasicLayout.vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import { onMounted } from "vue";
 
 const store = useStore();
 const router = useRouter();
@@ -9,12 +10,20 @@ const router = useRouter();
 router.beforeEach((to, from, next) => {
   if (
     to.meta?.success === "admin" &&
-    store.state.user.loginUser.role !== "admin"
+    store.state.user.loginUser.userRole !== "admin"
   ) {
     next("/404");
     return;
   }
   next();
+});
+
+const doInit = () => {
+  console.log("欢迎登录");
+};
+
+onMounted(() => {
+  doInit();
 });
 </script>
 <template>
