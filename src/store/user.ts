@@ -11,7 +11,6 @@ export default {
   }),
   actions: {
     async getLoginUser({ commit, state }, payload) {
-      // todo 从远程获取登录信息
       const res = await UserControllerService.getLoginUserUsingGet();
       if (res.code === 0 && res.data?.id) {
         commit("updateUser", res.data);

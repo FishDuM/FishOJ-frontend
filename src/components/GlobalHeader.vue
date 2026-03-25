@@ -21,12 +21,12 @@ function doMenuClick(key: string) {
 
 const store = useStore();
 
-setTimeout(() => {
-  store.dispatch("user/getLoginUser", {
-    userName: "fish",
-    userRole: accessEnum.ADMIN,
-  });
-}, 3000);
+// setTimeout(() => {
+//   store.dispatch("user/getLoginUser", {
+//     userName: "fish",
+//     userRole: accessEnum.ADMIN,
+//   });
+// }, 3000);
 
 const visibleRoutes = computed(() => {
   return routes.filter((item) => {
@@ -34,7 +34,7 @@ const visibleRoutes = computed(() => {
     if (item.meta?.hideInMenu) {
       return false;
     } else if (
-      !checkAccess(store.state.user.loginUser.userRole, item.meta?.success)
+      !checkAccess(store.state.user?.loginUser?.userRole, item.meta?.success)
     ) {
       return false;
     }
