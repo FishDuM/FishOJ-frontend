@@ -1,17 +1,26 @@
 // initial state
 import { StoreOptions } from "vuex";
+import { UserControllerService } from "../../generated";
 
 export default {
   namespaced: true,
   state: () => ({
     loginUser: {
       userName: "未登录",
-      userRole: "NoLogin",
     },
   }),
   actions: {
-    getLoginUser({ commit, state }, payload) {
+    async getLoginUser({ commit, state }, payload) {
       // todo 从远程获取登录信息
+      const res = await UserControllerService.getLoginUserUsingGet();
+      if (res.code === 0 && res.data?.id) {
+        commit("updateUser", res.data);
+      } else {
+        commit("updateUser", {
+          ...state.loginUser,
+          userRole: "NoLogin",
+        });
+      }
       commit("updateUser", payload);
     },
   },

@@ -3,6 +3,7 @@ import BasicLayout from "@/layouts/BasicLayout.vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { onMounted } from "vue";
+import { UserControllerService } from "../generated";
 
 const store = useStore();
 const router = useRouter();
@@ -18,12 +19,10 @@ router.beforeEach((to, from, next) => {
   next();
 });
 
-const doInit = () => {
-  console.log("欢迎登录");
-};
+// const doInit = async () => {};
 
 onMounted(() => {
-  doInit();
+  // doInit();
 });
 </script>
 <template>
