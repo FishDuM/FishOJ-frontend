@@ -4,6 +4,7 @@ import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import checkAccess from "@/access/checkAccess";
+import PopComponent from "@/components/PopComponent.vue";
 
 const router = useRouter();
 const selectedKeys = ref(["/"]);
@@ -67,7 +68,10 @@ const visibleRoutes = computed(() => {
       </a-menu>
     </a-col>
     <a-col flex="100px">
-      <div>{{ store.state.user?.loginUser?.userName ?? "未登录" }}</div>
+      <div v-if="store.state.user?.loginUser?.id">
+        {{ store.state.user?.loginUser?.userName ?? "未登录" }}
+      </div>
+      <div v-else><PopComponent /></div>
     </a-col>
   </a-row>
 </template>
