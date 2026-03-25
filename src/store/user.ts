@@ -1,6 +1,6 @@
 // initial state
 import { StoreOptions } from "vuex";
-import { UserControllerService } from "../../generated";
+import { LoginUserVO, UserControllerService } from "../../generated";
 
 export default {
   namespaced: true,
@@ -13,7 +13,7 @@ export default {
     async getLoginUser({ commit, state }, payload) {
       const res = await UserControllerService.getLoginUserUsingGet();
       if (res.code === 0 && res.data?.id) {
-        commit("updateUser", res.data);
+        commit("updateUser");
       } else {
         commit("updateUser", {
           ...state.loginUser,

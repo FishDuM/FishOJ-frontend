@@ -4,7 +4,6 @@ import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import checkAccess from "@/access/checkAccess";
-import accessEnum from "@/access/accessEnum";
 
 const router = useRouter();
 const selectedKeys = ref(["/"]);
@@ -30,7 +29,6 @@ const store = useStore();
 
 const visibleRoutes = computed(() => {
   return routes.filter((item) => {
-    console.log(store.state.user.loginUser);
     if (item.meta?.hideInMenu) {
       return false;
     } else if (
@@ -42,9 +40,7 @@ const visibleRoutes = computed(() => {
   });
 });
 
-onMounted(() => {
-  console.log(store.state.user.loginUser);
-});
+// onMounted(() => {});
 </script>
 
 <template>
