@@ -1,6 +1,6 @@
 // initial state
 import { StoreOptions } from "vuex";
-import { LoginUserVO, UserControllerService } from "../../generated";
+import { UserControllerService } from "../../generated";
 
 export default {
   namespaced: true,

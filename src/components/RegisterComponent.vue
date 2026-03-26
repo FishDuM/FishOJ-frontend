@@ -30,7 +30,9 @@ const handleSubmit = async () => {
 
 <template>
   <div class="RegisterComponent">
-    <h1 style="text-align: center; margin-bottom: 30px">用户注册</h1>
+    <h1 style="text-align: center; margin-bottom: 30px; margin-top: -10px">
+      用户注册
+    </h1>
     <a-form
       :model="form"
       @submit="handleSubmit"

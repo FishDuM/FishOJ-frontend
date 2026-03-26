@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { routes } from "@/router/routes";
-import { computed, onMounted, ref } from "vue";
+import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import checkAccess from "@/access/checkAccess";

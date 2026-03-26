@@ -34,7 +34,9 @@ const handleSubmit = async () => {
 
 <template>
   <div class="loginComponent">
-    <h1 style="text-align: center; margin-bottom: 30px">用户登录</h1>
+    <h1 style="text-align: center; margin-bottom: 30px; margin-top: -10px">
+      用户登录
+    </h1>
 
     <a-form
       :model="form"

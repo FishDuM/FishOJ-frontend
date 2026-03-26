@@ -16,7 +16,9 @@ const handleClick = () => {
 
 <template>
   <div id="PopComponent">
-    <a-button type="primary" @click="handleClick">登录</a-button>
+    <a-button type="primary" @click="handleClick">
+      <a-space><icon-idcard /> 登录</a-space>
+    </a-button>
     <a-modal
       v-model:visible="visible"
       unmountOnClose
@@ -27,13 +29,13 @@ const handleClick = () => {
     >
       <a-tabs>
         <a-tab-pane key="1">
-          <template #title> <icon-calendar /> 登录 </template>
+          <template #title> <icon-idcard /> 登录 </template>
           <div class="login">
             <LoginComponent />
           </div>
         </a-tab-pane>
         <a-tab-pane key="2">
-          <template #title> <icon-clock-circle /> 注册 </template>
+          <template #title><icon-user-add /> 注册 </template>
           <div class="register">
             <RegisterComponent @emitFlag="handleClose" />
           </div>
