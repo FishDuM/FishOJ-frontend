@@ -9,7 +9,7 @@ import GlobalHeader from "@/components/GlobalHeader.vue";
         <GlobalHeader />
       </a-layout-header>
       <a-layout-content class="content">
-        <!--        <router-view />-->
+        <router-view />
       </a-layout-content>
       <a-layout-footer class="footer">Footer</a-layout-footer>
     </a-layout>

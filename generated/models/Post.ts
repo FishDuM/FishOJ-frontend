@@ -15,3 +15,4 @@ export type Post = {
     updateTime?: string;
     userId?: number;
 };
+

@@ -6,6 +6,8 @@ import ArcoVueIcon from "@arco-design/web-vue/es/icon";
 import router from "./router";
 import store from "./store";
 import "@/access/index";
+import "bytemd/dist/index.css";
+import "highlight.js/styles/default.css";
 
 createApp(App)
   .use(store)

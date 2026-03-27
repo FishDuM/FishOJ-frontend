@@ -40,8 +40,6 @@ const visibleRoutes = computed(() => {
     return true;
   });
 });
-
-// onMounted(() => {});
 </script>
 
 <template>

@@ -27,8 +27,8 @@ export class PostControllerService {
      * @throws ApiError
      */
     public static addPostUsingPost(
-postAddRequest: PostAddRequest,
-): CancelablePromise<BaseResponse_long_ | any> {
+        postAddRequest: PostAddRequest,
+    ): CancelablePromise<BaseResponse_long_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/post/add',
@@ -49,8 +49,8 @@ postAddRequest: PostAddRequest,
      * @throws ApiError
      */
     public static deletePostUsingPost(
-deleteRequest: DeleteRequest,
-): CancelablePromise<BaseResponse_boolean_ | any> {
+        deleteRequest: DeleteRequest,
+    ): CancelablePromise<BaseResponse_boolean_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/post/delete',
@@ -71,8 +71,8 @@ deleteRequest: DeleteRequest,
      * @throws ApiError
      */
     public static editPostUsingPost(
-postEditRequest: PostEditRequest,
-): CancelablePromise<BaseResponse_boolean_ | any> {
+        postEditRequest: PostEditRequest,
+    ): CancelablePromise<BaseResponse_boolean_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/post/edit',
@@ -92,8 +92,8 @@ postEditRequest: PostEditRequest,
      * @throws ApiError
      */
     public static getPostVoByIdUsingGet(
-id?: number,
-): CancelablePromise<BaseResponse_PostVO_> {
+        id?: number,
+    ): CancelablePromise<BaseResponse_PostVO_> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/post/get/vo',
@@ -116,8 +116,8 @@ id?: number,
      * @throws ApiError
      */
     public static listPostByPageUsingPost(
-postQueryRequest: PostQueryRequest,
-): CancelablePromise<BaseResponse_Page_Post_ | any> {
+        postQueryRequest: PostQueryRequest,
+    ): CancelablePromise<BaseResponse_Page_Post_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/post/list/page',
@@ -138,8 +138,8 @@ postQueryRequest: PostQueryRequest,
      * @throws ApiError
      */
     public static listPostVoByPageUsingPost(
-postQueryRequest: PostQueryRequest,
-): CancelablePromise<BaseResponse_Page_PostVO_ | any> {
+        postQueryRequest: PostQueryRequest,
+    ): CancelablePromise<BaseResponse_Page_PostVO_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/post/list/page/vo',
@@ -160,8 +160,8 @@ postQueryRequest: PostQueryRequest,
      * @throws ApiError
      */
     public static listMyPostVoByPageUsingPost(
-postQueryRequest: PostQueryRequest,
-): CancelablePromise<BaseResponse_Page_PostVO_ | any> {
+        postQueryRequest: PostQueryRequest,
+    ): CancelablePromise<BaseResponse_Page_PostVO_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/post/my/list/page/vo',
@@ -182,8 +182,8 @@ postQueryRequest: PostQueryRequest,
      * @throws ApiError
      */
     public static searchPostVoByPageUsingPost(
-postQueryRequest: PostQueryRequest,
-): CancelablePromise<BaseResponse_Page_PostVO_ | any> {
+        postQueryRequest: PostQueryRequest,
+    ): CancelablePromise<BaseResponse_Page_PostVO_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/post/search/page/vo',
@@ -204,8 +204,8 @@ postQueryRequest: PostQueryRequest,
      * @throws ApiError
      */
     public static updatePostUsingPost(
-postUpdateRequest: PostUpdateRequest,
-): CancelablePromise<BaseResponse_boolean_ | any> {
+        postUpdateRequest: PostUpdateRequest,
+    ): CancelablePromise<BaseResponse_boolean_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/post/update',
