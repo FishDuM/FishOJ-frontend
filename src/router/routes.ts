@@ -1,10 +1,10 @@
 import { RouteRecordRaw } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
-import AdminView from "@/views/AdminView.vue";
 import NoAuthView from "@/views/NoAuthView.vue";
 import UserLayout from "@/layouts/UserLayout.vue";
 import UserLoginView from "@/views/user/UserLoginView.vue";
 import UserRegisterView from "@/views/user/UserRegisterView.vue";
+import AddQuestionView from "@/views/question/AddQuestionView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -33,9 +33,9 @@ export const routes: Array<RouteRecordRaw> = [
     component: HomeView,
   },
   {
-    path: "/admin",
-    name: "管理员可见",
-    component: AdminView,
+    path: "/admin/add_question",
+    name: "添加题目",
+    component: AddQuestionView,
     meta: {
       success: "admin",
     },

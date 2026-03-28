@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import BasicLayout from "@/layouts/BasicLayout.vue";
 import { useRoute } from "vue-router";
-import MdEditor from "@/components/MdEditor.vue";
 
 const route = useRoute();
 </script>

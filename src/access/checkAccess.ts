@@ -10,8 +10,8 @@ const checkAccess = (userRole: string, needAccess = accessEnum.NOT_LOGIN) => {
     return true;
   } else if (userRole === accessEnum.ADMIN) {
     return true;
-  } else {
-    return userRole === needAccess;
+  } else if (needAccess === accessEnum.USER && userRole === accessEnum.USER) {
+    return true;
   }
 };
 
