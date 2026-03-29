@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { Page_Question_, QuestionControllerService } from "../../../generated";
+import {
+  Page_Question_,
+  Question,
+  QuestionControllerService,
+} from "../../../generated";
 import { Message } from "@arco-design/web-vue";
+import { useRouter } from "vue-router";
 
 const columns = [
   {
@@ -59,6 +64,8 @@ const columns = [
 ];
 const data = ref<Page_Question_>();
 
+const router = useRouter();
+
 const totalNum = ref(0);
 
 const pageParms = ref({
@@ -91,6 +98,15 @@ const doDelete = async (id: number) => {
   }
 };
 
+const doUpdate = (question: Question) => {
+  router.push({
+    path: "/admin/update/question",
+    query: {
+      id: question.id,
+    },
+  });
+};
+
 onMounted(() => {
   getPage();
 });
@@ -101,7 +117,7 @@ onMounted(() => {
     :columns="columns"
     :data="data"
     :pagination="{
-      total: totalNum,
+      total: +totalNum,
       current: pageParms.current,
       pageSize: pageParms.pageSize,
       showTotal: true,
@@ -109,10 +125,7 @@ onMounted(() => {
   >
     <template #optional="{ record }">
       <a-space>
-        <a-button
-          type="primary"
-          @click="$modal.info({ title: 'Name', content: record.name })"
-          >编辑</a-button
+        <a-button type="primary" @click="doUpdate(record)">编辑</a-button
         ><a-button status="danger" @click="doDelete(record.id)">删除</a-button>
       </a-space>
     </template>

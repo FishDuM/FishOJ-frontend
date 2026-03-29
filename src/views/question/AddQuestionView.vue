@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import MdEditor from "@/components/MdEditor.vue";
-import { reactive } from "vue";
+import { onMounted, reactive } from "vue";
 import { QuestionControllerService } from "../../../generated";
 import { Message } from "@arco-design/web-vue";
+import { useRoute } from "vue-router";
 
 const form = reactive({
   answer: "",
@@ -21,6 +22,32 @@ const form = reactive({
   tags: [],
   title: "",
 });
+
+const route = useRoute();
+
+const updatePage = route.path.includes("update");
+
+// 根据id请求老数据
+
+const loadData = async () => {
+  const id = route.query.id;
+  if (!id) {
+    return;
+  }
+  const res = await QuestionControllerService.getQuestionByIdUsingGet(
+    id as any
+  );
+  if (res.code === 0) {
+    Object.assign(form, res.data);
+    form.judgeConfig.timeLimit = Number(res?.data?.judgeConfig?.timeLimit) || 0;
+    form.judgeConfig.memoryLimit =
+      Number(res?.data?.judgeConfig?.memoryLimit) || 0;
+    form.judgeConfig.stackLimit =
+      Number(res?.data?.judgeConfig?.stackLimit) || 0;
+  } else {
+    Message.error("加载失败" + res.message);
+  }
+};
 
 const handleAdd = () => {
   form.judgeCase.push({
@@ -41,6 +68,16 @@ const answerChange = (v: string) => {
 };
 
 const changeSubmit = async () => {
+  if (updatePage) {
+    const res = await QuestionControllerService.editQuestionUsingPost(form);
+    if (res.code === 0) {
+      Message.success("修改题目成功");
+    } else {
+      Message.error("修改题目失败" + res.message);
+    }
+    return;
+  }
+
   const res = await QuestionControllerService.addQuestionUsingPost(form);
   if (res.code === 0) {
     Message.success("创建题目成功");
@@ -48,6 +85,10 @@ const changeSubmit = async () => {
     Message.error("创建题目失败" + res.message);
   }
 };
+
+onMounted(() => {
+  loadData();
+});
 </script>
 
 <template>
@@ -83,7 +124,7 @@ const changeSubmit = async () => {
       >
         <a-space direction="vertical">
           <a-form-item
-            field="judgeConfig.timeLimit"
+            field="form.judgeConfig.timeLimit"
             label="时间限制"
             style="min-width: 480px"
           >
@@ -96,7 +137,7 @@ const changeSubmit = async () => {
             />
           </a-form-item>
           <a-form-item
-            field="judgeConfig.memoryLimit"
+            field="form.judgeConfig.memoryLimit"
             label="内存限制"
             style="min-width: 480px"
           >
@@ -109,7 +150,7 @@ const changeSubmit = async () => {
             />
           </a-form-item>
           <a-form-item
-            field="judgeConfig.stackLimit"
+            field="form.judgeConfig.stackLimit"
             label="堆栈限制"
             style="min-width: 640px"
           >
