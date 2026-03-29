@@ -46,6 +46,7 @@ const columns = [
   {
     title: "判题配置",
     dataIndex: "judgeConfig",
+    slotName: "judgeConfig",
   },
   {
     title: "判题用例",
@@ -125,9 +126,14 @@ onMounted(() => {
       showTotal: true,
     }"
   >
-    <template #judgeConfig="{ record }">
+    <template #tags="{ record }">
       <a-space>
-        <a-tag color="blue">{{ record.judgeConfig }}</a-tag>
+        <a-tag
+          v-for="tag in JSON.parse(record?.tags || []) as JudgeConfig"
+          :key="tag"
+          color="green"
+          >{{ tag }}</a-tag
+        >
       </a-space>
     </template>
 
