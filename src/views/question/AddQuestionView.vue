@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import MdEditor from "@/components/MdEditor.vue";
 import { reactive } from "vue";
+import { QuestionControllerService } from "../../../generated";
+import { Message } from "@arco-design/web-vue";
 
 const form = reactive({
   answer: "",
@@ -29,25 +31,46 @@ const handleAdd = () => {
 const handleDelete = (index: number) => {
   form.judgeCase.splice(index, 1);
 };
+
+const contentChange = (v: string) => {
+  form.content = v;
+};
+
+const answerChange = (v: string) => {
+  form.answer = v;
+};
+
+const changeSubmit = async () => {
+  const res = await QuestionControllerService.addQuestionUsingPost(form);
+  if (res.code === 0) {
+    Message.success("创建题目成功");
+  } else {
+    Message.error("创建题目失败" + res.message);
+  }
+};
 </script>
 
 <template>
   <div id="addQuestionView">
     <a-form :model="form">
       <a-form-item field="title" label="标题">
-        <a-input v-model="form.title" placeholder="请输入标题" />
+        <a-input
+          v-model="form.title"
+          placeholder="请输入标题"
+          style="max-width: 640px"
+        />
       </a-form-item>
       <a-form-item field="content" label="内容">
-        <MdEditor />
+        <MdEditor :value="form.content" :handle-change="contentChange" />
       </a-form-item>
       <a-form-item field="answer" label="答案">
-        <MdEditor />
+        <MdEditor :value="form.answer" :handle-change="answerChange" />
       </a-form-item>
 
       <a-form-item field="tags" label="标签">
         <a-input-tag
-          v-model="tags"
-          :style="{ width: '320px' }"
+          v-model="form.tags"
+          :style="{ width: '640px' }"
           placeholder="请选择标签"
           allow-clear
         />
@@ -88,7 +111,7 @@ const handleDelete = (index: number) => {
           <a-form-item
             field="judgeConfig.stackLimit"
             label="堆栈限制"
-            style="min-width: 480px"
+            style="min-width: 640px"
           >
             <a-input-number
               v-model="form.judgeConfig.stackLimit"
@@ -109,8 +132,9 @@ const handleDelete = (index: number) => {
         <a-form-item
           v-for="(judgeCaseItem, index) of form.judgeCase"
           :key="index"
+          no-style
         >
-          <a-space direction="vertical" style="min-width: 480px">
+          <a-space direction="vertical" style="min-width: 640px">
             <a-form-item
               :field="`form.judgeCase[${index}].input`"
               :label="`输入样例-${index}`"
@@ -134,18 +158,27 @@ const handleDelete = (index: number) => {
 
             <a-button
               @click="handleDelete(index)"
-              :style="{ marginLeft: '10px' }"
-              >删除</a-button
+              status="danger"
+              style="min-width: 640px"
+              >删除样例</a-button
             >
           </a-space>
         </a-form-item>
 
-        <div>
-          <a-button @click="handleAdd">添加样例</a-button>
+        <div style="margin-top: 16px">
+          <a-button @click="handleAdd" status="success" style="min-width: 640px"
+            >添加样例</a-button
+          >
         </div>
       </a-form-item>
       <a-form-item>
-        <a-button html-type="submit">提交</a-button>
+        <a-button
+          style="min-width: 640px"
+          html-type="submit"
+          type="primary"
+          @click="changeSubmit"
+          >提交</a-button
+        >
       </a-form-item>
     </a-form>
   </div>
