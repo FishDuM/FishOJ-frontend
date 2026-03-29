@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import {
+  JudgeConfig,
   Page_Question_,
   Question,
   QuestionControllerService,
@@ -24,6 +25,7 @@ const columns = [
   {
     title: "标签",
     dataIndex: "tags",
+    slotName: "tags",
   },
   {
     title: "答案",
@@ -123,6 +125,12 @@ onMounted(() => {
       showTotal: true,
     }"
   >
+    <template #judgeConfig="{ record }">
+      <a-space>
+        <a-tag color="blue">{{ record.judgeConfig }}</a-tag>
+      </a-space>
+    </template>
+
     <template #optional="{ record }">
       <a-space>
         <a-button type="primary" @click="doUpdate(record)">编辑</a-button
