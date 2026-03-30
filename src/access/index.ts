@@ -5,9 +5,11 @@ import store from "@/store/index";
 import checkAccess from "@/access/checkAccess";
 
 router.beforeEach(async (to, from, next) => {
-  const user = store.state.user.loginUser;
+  let user = store.state.user.loginUser;
   if (!user || !user?.userRole) {
     await store.dispatch("user/getLoginUser");
+    user = store.state.user.loginUser;
+    console.log(user);
   }
 
   const needAccess = to.meta?.success ?? accessEnum.NOT_LOGIN;

@@ -94,7 +94,7 @@ const doDelete = async (id: number) => {
   });
   if (res.code === 0) {
     await getPage();
-    pageParms.value = { ...pageParms.value, current: 1 };
+    // pageParms.value = { ...pageParms.value, current: 1 };
     Message.success("删除成功");
   } else {
     Message.error("删除失败" + res.message);
@@ -108,6 +108,11 @@ const doUpdate = (question: Question) => {
       id: question.id,
     },
   });
+};
+
+const onPageChange = (page: number) => {
+  pageParms.value.current = page;
+  getPage();
 };
 
 onMounted(() => {
@@ -125,6 +130,7 @@ onMounted(() => {
       pageSize: pageParms.pageSize,
       showTotal: true,
     }"
+    @page-change="onPageChange"
   >
     <template #tags="{ record }">
       <a-space>
